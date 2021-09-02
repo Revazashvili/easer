@@ -1,0 +1,6 @@
+port: 8000
+
+mongo:
+  uri: "mongodb://mongodb:27017"
+  name: "template"
+  user_collection: "templates"
