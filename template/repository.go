@@ -4,7 +4,7 @@ import (
 	"github.com/Revazashvili/easer/models"
 )
 
-type repository interface {
+type Repository interface {
 	GetTemplates() ([]*models.Template, error)
 	GetTemplate(id string) (*models.Template, error)
 	AddTemplate(t *models.Template) (string, error)
