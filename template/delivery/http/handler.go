@@ -20,13 +20,13 @@ type getResponse struct {
 	Templates []*Template `json:"templates"`
 }
 
-func(h * Handler) Get(c *gin.Context)  {
-	ts,err := h.useCase.All()
-	if err != nil{
-		c.AbortWithStatus(http.StatusInternalServerError)
+func (h *Handler) Get(c *gin.Context) {
+	ts, err := h.useCase.All()
+	if err != nil {
+		c.String(http.StatusInternalServerError, "%s", err.Error())
 		return
 	}
-	c.JSON(http.StatusOK,&getResponse{
+	c.JSON(http.StatusOK, &getResponse{
 		Templates: asResponses(ts),
 	})
 }
@@ -35,18 +35,18 @@ type getByIdResponse struct {
 	Template *Template `json:"template"`
 }
 
-func(h *Handler) GetById(c *gin.Context)  {
+func (h *Handler) GetById(c *gin.Context) {
 	id := c.Param("id")
 	if id == "" || len(id) <= 0 {
 		c.AbortWithStatus(http.StatusBadRequest)
 		return
 	}
-	t,err := h.useCase.Find(id)
-	if err != nil{
-		c.AbortWithStatus(http.StatusInternalServerError)
+	t, err := h.useCase.Find(id)
+	if err != nil {
+		c.String(http.StatusInternalServerError, "%s", err.Error())
 		return
 	}
-	c.JSON(http.StatusOK,&getByIdResponse{
+	c.JSON(http.StatusOK, &getByIdResponse{
 		Template: asResponse(t),
 	})
 }
@@ -55,19 +55,19 @@ type insertResponse struct {
 	Id string `json:"id"`
 }
 
-func (h *Handler) Insert(c *gin.Context)  {
+func (h *Handler) Insert(c *gin.Context) {
 	t := new(Template)
 	err := c.BindJSON(&t)
-	if err != nil{
+	if err != nil {
 		c.AbortWithStatus(http.StatusBadRequest)
 		return
 	}
-	id,err := h.useCase.Insert(asDomain(t))
-	if err != nil{
-		c.AbortWithStatus(http.StatusInternalServerError)
+	id, err := h.useCase.Insert(asDomain(t))
+	if err != nil {
+		c.String(http.StatusInternalServerError, "%s", err.Error())
 		return
 	}
-	c.JSON(http.StatusOK,&insertResponse{
+	c.JSON(http.StatusOK, &insertResponse{
 		Id: id,
 	})
 }
@@ -76,27 +76,27 @@ type updateResponse struct {
 	Id string `json:"id"`
 }
 
-func (h *Handler) Update(c *gin.Context)  {
+func (h *Handler) Update(c *gin.Context) {
 	t := new(Template)
 	err := c.BindJSON(&t)
-	if err != nil{
+	if err != nil {
 		c.AbortWithStatus(http.StatusBadRequest)
 		return
 	}
-	id,err := h.useCase.Update(asDomain(t))
-	if err != nil{
-		c.AbortWithStatus(http.StatusInternalServerError)
+	id, err := h.useCase.Update(asDomain(t))
+	if err != nil {
+		c.String(http.StatusInternalServerError, "%s", err.Error())
 		return
 	}
-	c.JSON(http.StatusOK,&updateResponse{
+	c.JSON(http.StatusOK, &updateResponse{
 		Id: id,
 	})
 }
 
-func (h *Handler) Delete(g *gin.Context) {
-	err := h.useCase.Delete(g.Param("id"))
+func (h *Handler) Delete(c *gin.Context) {
+	err := h.useCase.Delete(c.Param("id"))
 	if err != nil {
-		g.JSON(http.StatusInternalServerError, err)
+		c.String(http.StatusInternalServerError, "%s", err.Error())
 	}
-	g.AbortWithStatus(http.StatusOK)
+	c.AbortWithStatus(http.StatusOK)
 }
