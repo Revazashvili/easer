@@ -12,25 +12,25 @@ type Template struct {
 	Owner        string        `bson:"owner"`
 	TemplateBody string        `bson:"template_body"`
 	Options      *Options      `bson:"options"`
-	Created      time.Time     `bson:"created"`
+	CreatedAt    time.Time     `bson:"created_at"`
 	CreatedBy    string        `bson:"created_by"`
-	Updated      time.Time     `bson:"updated"`
+	UpdatedAt    time.Time     `bson:"updated_at"`
 	UpdatedBy    string        `bson:"updated_by"`
 }
 
 type Options struct {
-	Grayscale            bool                   `json:"grayscale"`
-	Dpi                  uint                   `json:"dpi"`
-	DisplayHeaderFooter  bool                   `bson:"display_header_footer"`
+	Grayscale            bool                    `json:"grayscale"`
+	Dpi                  uint                    `json:"dpi"`
+	DisplayHeaderFooter  bool                    `bson:"display_header_footer"`
 	HeaderFooterOptions  *HeaderAndFooterOptions `bson:"header_footer_options"`
-	PrintBackground      bool                   `bson:"print_background"`
-	Orientation          string                 `bson:"orientation"`
-	Format               string                 `bson:"format"`
-	EnableForms          bool                   `bson:"enable_forms"`
-	DisableExternalLinks bool                   `bson:"disable_external_links"`
-	DisableInternalLinks bool                   `bson:"disable_internal_links"`
-	NoBackground         bool                   `bson:"no_background"`
-	NoImages             bool                   `bson:"no_images"`
+	PrintBackground      bool                    `bson:"print_background"`
+	Orientation          string                  `bson:"orientation"`
+	Format               string                  `bson:"format"`
+	EnableForms          bool                    `bson:"enable_forms"`
+	DisableExternalLinks bool                    `bson:"disable_external_links"`
+	DisableInternalLinks bool                    `bson:"disable_internal_links"`
+	NoBackground         bool                    `bson:"no_background"`
+	NoImages             bool                    `bson:"no_images"`
 	Margin               *Margin                 `bson:"margin"`
 }
 
