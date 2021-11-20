@@ -1,67 +1,107 @@
 package tests
 
 import (
-	"fmt"
 	"github.com/Revazashvili/easer/models"
 	"github.com/Revazashvili/easer/template/repository/mongo"
-	"github.com/globalsign/mgo"
-	"github.com/spf13/viper"
-	"log"
 	"testing"
 )
 
-func initDB() *mgo.Database {
-	uri := viper.GetString("mongo.uri")
-	fmt.Println(uri)
-	session, err := mgo.Dial(uri)
-	if err != nil {
-		log.Fatalf("Error occured while establishing connection to mongoDB")
-	}
-	db := session.DB(viper.GetString("mongo.name"))
-	return db
+var options = mongo.DbOptions{
+	Uri:              "mongodb://localhost:27017",
+	DbName:           "template_test",
+	TemplateCollName: "templates",
 }
 
-func TestShouldAddTemplateWithoutError(t *testing.T) {
-	db := initDB()
-	tempRepo := mongo.NewTemplateRepository(db, "templates")
-	template := &models.Template{
-		Owner:        "App",
-		TemplateBody: "some html",
-		Name:         "test",
-		Description:  "test",
-		Options: &models.Options{
-			Orientation:          "A4",
-			DisableInternalLinks: false,
-			DisableExternalLinks: false,
-			NoBackground:         true,
+var template = models.Template{
+	Owner:        "App",
+	TemplateBody: "some html",
+	Name:         "test",
+	Description:  "test",
+	Options: models.Options{
+		Orientation:          "Portrait",
+		DisableInternalLinks: false,
+		DisableExternalLinks: false,
+		NoBackground:         true,
+		Margin: models.Margin{
+			Top:    1,
+			Right:  1,
+			Left:   1,
+			Bottom: 1,
 		},
+		PrintBackground:     false,
+		NoImages:            false,
+		Grayscale:           false,
+		Format:              "A4",
+		Dpi:                 2,
+		EnableForms:         false,
+		DisplayHeaderFooter: false,
+		HeaderFooterOptions: models.HeaderAndFooterOptions{
+			FooterCenter:   "ad",
+			HeaderFontName: "asd",
+		},
+	},
+}
+
+func TestGetTemplates(t *testing.T) {
+	tempRepo := mongo.NewTemplateRepository(options)
+	_, err := tempRepo.AddTemplate(template)
+	if err != nil {
+		t.Fail()
 	}
+
+	ts, err := tempRepo.GetTemplates()
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(ts)
+}
+
+func TestGetTemplate(t *testing.T) {
+	tempRepo := mongo.NewTemplateRepository(options)
+	id, err := tempRepo.AddTemplate(template)
+	if err != nil {
+		t.Fail()
+	}
+	t.Logf("Inserted template id: %s", id)
+
+	tm, err := tempRepo.GetTemplate(id)
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(tm)
+}
+
+func TestAddTemplate(t *testing.T) {
+	tempRepo := mongo.NewTemplateRepository(options)
 	_, err := tempRepo.AddTemplate(template)
 	if err != nil {
 		t.Fail()
 	}
 }
 
-func TestGetTemplatesReturnsNothing(t *testing.T) {
-	db := initDB()
-	tempRepo := mongo.NewTemplateRepository(db, "templates")
-	_, err := tempRepo.GetTemplates()
+func TestUpdateTemplate(t *testing.T) {
+	tempRepo := mongo.NewTemplateRepository(options)
+	id, err := tempRepo.AddTemplate(template)
 	if err != nil {
-		t.Fatal(err)
+		t.Fail()
+	}
+
+	template.Name = "test updated"
+	_, err = tempRepo.UpdateTemplate(id, template)
+	if err != nil {
 		return
 	}
 }
 
-func IntMin(a, b int) int {
-	if a < b {
-		return a
+func TestDeleteTemplate(t *testing.T) {
+	tempRepo := mongo.NewTemplateRepository(options)
+	id, err := tempRepo.AddTemplate(template)
+	if err != nil {
+		t.Fail()
 	}
-	return b
-}
 
-func TestSample(t *testing.T) {
-	ans := IntMin(2, -2)
-	if ans != -2 {
-		t.Errorf("IntMin(2, -2) = %d; want -2", ans)
+	err = tempRepo.DeleteTemplate(id)
+	if err != nil {
+		t.Fail()
 	}
 }
