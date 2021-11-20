@@ -1,71 +1,151 @@
 package mongo
 
 import (
+	"context"
+	"errors"
 	"github.com/Revazashvili/easer/models"
 	"github.com/Revazashvili/easer/template"
-	"github.com/globalsign/mgo"
-	"github.com/globalsign/mgo/bson"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
 )
 
-type TemplateRepository struct {
-	db *mgo.Collection
+var ErrGeneral = errors.New("Error")
+
+type DbOptions struct {
+	Uri              string
+	DbName           string
+	TemplateCollName string
 }
 
-func NewTemplateRepository(db *mgo.Database, collection string) *TemplateRepository {
-	return &TemplateRepository{
-		db: db.C(collection),
+type TemplateRepository struct {
+	dbOptions DbOptions
+}
+
+func NewTemplateRepository(options DbOptions) TemplateRepository {
+	return TemplateRepository{
+		dbOptions: options,
 	}
 }
 
-func (tr TemplateRepository) GetTemplates() ([]*models.Template, error) {
-	defer tr.db.Database.Session.Close()
-	var ts []*Template
-
-	err := tr.db.Find(bson.M{}).All(&ts)
+func getTemplateCollection(dbOptions DbOptions) (*mongo.Collection, error) {
+	clientOptions := options.Client().ApplyURI(dbOptions.Uri)
+	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
-		log.Fatalf("%s", err.Error())
-		return nil, template.ErrTemplatesNotFound
+		log.Fatal(err)
+		return nil, ErrGeneral
+	}
+	collection := client.Database(dbOptions.DbName).Collection(dbOptions.TemplateCollName)
+	return collection, nil
+}
+
+func disconnect(coll *mongo.Collection) {
+	client := coll.Database().Client()
+	err := client.Disconnect(context.TODO())
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func (tr TemplateRepository) GetTemplates() ([]models.Template, error) {
+	coll, err := getTemplateCollection(tr.dbOptions)
+	if err != nil {
+		return nil, err
+	}
+	defer disconnect(coll)
+	cur, err := coll.Find(
+		context.TODO(),
+		bson.D{},
+	)
+	if err != nil {
+		log.Fatal(err)
+		return nil, template.ErrTemplateNotFound
+	}
+	var ts []Template
+	if err = cur.All(context.TODO(), &ts); err != nil {
+		log.Fatal(err)
+		return nil, template.ErrTemplateNotDeleted
 	}
 	return AsDomainList(ts), nil
 }
 
-func (tr TemplateRepository) GetTemplate(id string) (*models.Template, error) {
-	defer tr.db.Database.Session.Close()
-	t := new(Template)
-	err := tr.db.FindId(bson.ObjectIdHex(id)).One(t)
+func (tr TemplateRepository) GetTemplate(id string) (models.Template, error) {
+	coll, err := getTemplateCollection(tr.dbOptions)
 	if err != nil {
-		log.Fatalf("%s", err.Error())
-		return nil, template.ErrTemplateNotFound
+		return models.Template{}, err
+	}
+	defer disconnect(coll)
+	var t Template
+	objID, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		log.Fatal(err)
+		return models.Template{}, template.ErrTemplateNotFound
+	}
+	err = coll.FindOne(
+		context.TODO(),
+		bson.M{"_id": bson.M{"$eq": objID}},
+	).Decode(&t)
+	if err != nil {
+		log.Fatal(err)
+		return models.Template{}, template.ErrTemplateNotFound
 	}
 	return AsDomain(t), nil
 }
 
-func (tr TemplateRepository) AddTemplate(t *models.Template) (string, error) {
-	defer tr.db.Database.Session.Close()
-	err := tr.db.Insert(AsDbModel(t))
+func (tr TemplateRepository) AddTemplate(t models.Template) (string, error) {
+	coll, err := getTemplateCollection(tr.dbOptions)
 	if err != nil {
-		log.Fatalf("%s", err.Error())
+		return "", err
+	}
+	defer disconnect(coll)
+	insertResult, err := coll.InsertOne(context.TODO(), AsDbModel(t, primitive.NewObjectID()))
+	if err != nil {
+		log.Fatal(err)
 		return "", template.ErrTemplateNotCreated
 	}
-	return t.Id, nil
+	return insertResult.InsertedID.(primitive.ObjectID).Hex(), nil
 }
 
-func (tr TemplateRepository) UpdateTemplate(t *models.Template) (string, error) {
-	defer tr.db.Database.Session.Close()
-	err := tr.db.UpdateId(bson.ObjectIdHex(t.Id), AsDbModel(t))
+func (tr TemplateRepository) UpdateTemplate(id string, t models.Template) (bool, error) {
+	coll, err := getTemplateCollection(tr.dbOptions)
 	if err != nil {
-		log.Fatalf("%s", err.Error())
-		return "", template.ErrTemplateNotUpdated
+		return false, err
 	}
-	return t.Id, nil
+	defer disconnect(coll)
+	objID, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		log.Fatal(err)
+		return false, template.ErrTemplateNotUpdated
+	}
+	update := bson.M{
+		"$set": AsDbModel(t, objID),
+	}
+	_, err = coll.UpdateOne(context.TODO(),
+		bson.M{"_id": bson.M{"$eq": objID}},
+		update)
+	if err != nil {
+		log.Fatal(err)
+		return false, template.ErrTemplateNotUpdated
+	}
+	return true, nil
 }
 
 func (tr TemplateRepository) DeleteTemplate(id string) error {
-	defer tr.db.Database.Session.Close()
-	err := tr.db.RemoveId(bson.ObjectIdHex(id))
+	coll, err := getTemplateCollection(tr.dbOptions)
 	if err != nil {
-		log.Fatalf("%s", err.Error())
+		return err
+	}
+	defer disconnect(coll)
+	objID, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		log.Fatal(err)
+		return template.ErrTemplateNotDeleted
+	}
+	_, err = coll.DeleteOne(context.TODO(), bson.M{"_id": bson.M{"$eq": objID}})
+	if err != nil {
+		log.Fatal(err)
 		return template.ErrTemplateNotDeleted
 	}
 	return nil

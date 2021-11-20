@@ -4,7 +4,7 @@ type Options struct {
 	Grayscale            bool
 	Dpi                  uint
 	DisplayHeaderFooter  bool
-	HeaderFooterOptions  *HeaderAndFooterOptions
+	HeaderFooterOptions  HeaderAndFooterOptions
 	PrintBackground      bool
 	Orientation          string
 	Format               string
@@ -13,5 +13,5 @@ type Options struct {
 	DisableInternalLinks bool
 	NoBackground         bool
 	NoImages             bool
-	Margin               *Margin
+	Margin               Margin
 }

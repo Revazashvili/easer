@@ -5,9 +5,9 @@ import (
 )
 
 type Repository interface {
-	GetTemplates() ([]*models.Template, error)
-	GetTemplate(id string) (*models.Template, error)
-	AddTemplate(t *models.Template) (string, error)
-	UpdateTemplate(t *models.Template) (string, error)
+	GetTemplates() ([]models.Template, error)
+	GetTemplate(id string) (models.Template, error)
+	AddTemplate(t models.Template) (string, error)
+	UpdateTemplate(id string, t models.Template) (bool, error)
 	DeleteTemplate(id string) error
 }

@@ -2,13 +2,13 @@ package mongo
 
 import (
 	"github.com/Revazashvili/easer/models"
-	"github.com/globalsign/mgo/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"time"
 )
 
-func AsDbModel(t *models.Template) *Template {
-	return &Template{
-		Id:           bson.NewObjectId(),
+func AsDbModel(t models.Template, id primitive.ObjectID) Template {
+	return Template{
+		Id:           id,
 		Name:         t.Name,
 		Description:  t.Description,
 		Owner:        t.Owner,
@@ -17,7 +17,7 @@ func AsDbModel(t *models.Template) *Template {
 		CreatedBy:    "System",
 		UpdatedAt:    time.Now(),
 		UpdatedBy:    "System",
-		Options: &Options{
+		Options: Options{
 			DisableExternalLinks: t.Options.DisableExternalLinks,
 			DisableInternalLinks: t.Options.DisableInternalLinks,
 			Dpi:                  t.Options.Dpi,
@@ -29,13 +29,13 @@ func AsDbModel(t *models.Template) *Template {
 			NoBackground:         t.Options.NoBackground,
 			Orientation:          t.Options.Orientation,
 			PrintBackground:      t.Options.PrintBackground,
-			Margin: &Margin{
+			Margin: Margin{
 				Top:    t.Options.Margin.Top,
 				Bottom: t.Options.Margin.Bottom,
 				Left:   t.Options.Margin.Left,
 				Right:  t.Options.Margin.Left,
 			},
-			HeaderFooterOptions: &HeaderAndFooterOptions{
+			HeaderFooterOptions: HeaderAndFooterOptions{
 				FooterCenter:   t.Options.HeaderFooterOptions.FooterCenter,
 				FooterHTML:     t.Options.HeaderFooterOptions.FooterHTML,
 				FooterLeft:     t.Options.HeaderFooterOptions.FooterLeft,
@@ -57,8 +57,8 @@ func AsDbModel(t *models.Template) *Template {
 	}
 }
 
-func AsDomainList(ts []*Template) []*models.Template {
-	out := make([]*models.Template, len(ts))
+func AsDomainList(ts []Template) []models.Template {
+	out := make([]models.Template, len(ts))
 
 	for i, t := range ts {
 		out[i] = AsDomain(t)
@@ -66,14 +66,14 @@ func AsDomainList(ts []*Template) []*models.Template {
 	return out
 }
 
-func AsDomain(t *Template) *models.Template {
-	return &models.Template{
+func AsDomain(t Template) models.Template {
+	return models.Template{
 		Id:           t.Id.Hex(),
 		Name:         t.Name,
 		Description:  t.Description,
 		Owner:        t.Owner,
 		TemplateBody: t.TemplateBody,
-		Options: &models.Options{
+		Options: models.Options{
 			DisableExternalLinks: t.Options.DisableExternalLinks,
 			DisableInternalLinks: t.Options.DisableInternalLinks,
 			Dpi:                  t.Options.Dpi,
@@ -85,13 +85,13 @@ func AsDomain(t *Template) *models.Template {
 			NoBackground:         t.Options.NoBackground,
 			Orientation:          t.Options.Orientation,
 			PrintBackground:      t.Options.PrintBackground,
-			Margin: &models.Margin{
+			Margin: models.Margin{
 				Top:    t.Options.Margin.Top,
 				Bottom: t.Options.Margin.Bottom,
 				Left:   t.Options.Margin.Left,
 				Right:  t.Options.Margin.Left,
 			},
-			HeaderFooterOptions: &models.HeaderAndFooterOptions{
+			HeaderFooterOptions: models.HeaderAndFooterOptions{
 				FooterCenter:   t.Options.HeaderFooterOptions.FooterCenter,
 				FooterHTML:     t.Options.HeaderFooterOptions.FooterHTML,
 				FooterLeft:     t.Options.HeaderFooterOptions.FooterLeft,

@@ -6,5 +6,5 @@ type Template struct {
 	Description  string
 	Owner        string
 	TemplateBody string
-	Options      *Options
+	Options      Options
 }
