@@ -15,22 +15,22 @@ func NewTemplateUseCase(templateRepo template.Repository) *TemplateUseCase {
 	}
 }
 
-func(t *TemplateUseCase) All() ([]*models.Template, error)  {
+func (t *TemplateUseCase) All() ([]models.Template, error) {
 	return t.templateRepo.GetTemplates()
 }
 
-func(t *TemplateUseCase) Find(id string) (*models.Template, error) {
+func (t *TemplateUseCase) Find(id string) (models.Template, error) {
 	return t.templateRepo.GetTemplate(id)
 }
 
-func(t *TemplateUseCase) Insert(tm * models.Template) (string,error) {
+func (t *TemplateUseCase) Insert(tm models.Template) (string, error) {
 	return t.templateRepo.AddTemplate(tm)
 }
 
-func(t *TemplateUseCase) Update(tm *models.Template) (string,error) {
-	return t.templateRepo.UpdateTemplate(tm)
+func (t *TemplateUseCase) Update(id string, tm models.Template) (bool, error) {
+	return t.templateRepo.UpdateTemplate(id, tm)
 }
 
-func(t * TemplateUseCase) Delete(id string) error {
+func (t *TemplateUseCase) Delete(id string) error {
 	return t.templateRepo.DeleteTemplate(id)
 }
