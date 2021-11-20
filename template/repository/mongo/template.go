@@ -61,12 +61,12 @@ func (tr TemplateRepository) GetTemplates() ([]models.Template, error) {
 	)
 	if err != nil {
 		log.Fatal(err)
-		return nil, template.ErrTemplateNotFound
+		return nil, template.ErrTemplatesNotFound
 	}
 	var ts []Template
 	if err = cur.All(context.TODO(), &ts); err != nil {
 		log.Fatal(err)
-		return nil, template.ErrTemplateNotDeleted
+		return nil, template.ErrTemplatesNotFound
 	}
 	return AsDomainList(ts), nil
 }
