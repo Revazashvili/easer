@@ -17,7 +17,7 @@ func NewHandler(useCase template.UseCase) *Handler {
 }
 
 type getResponse struct {
-	Templates []*Template `json:"templates"`
+	Templates []Template `json:"templates"`
 }
 
 func (h *Handler) Get(c *gin.Context) {
@@ -32,7 +32,7 @@ func (h *Handler) Get(c *gin.Context) {
 }
 
 type getByIdResponse struct {
-	Template *Template `json:"template"`
+	Template Template `json:"template"`
 }
 
 func (h *Handler) GetById(c *gin.Context) {
@@ -56,7 +56,7 @@ type insertResponse struct {
 }
 
 func (h *Handler) Insert(c *gin.Context) {
-	t := new(Template)
+	var t Template
 	err := c.BindJSON(&t)
 	if err != nil {
 		c.AbortWithStatus(http.StatusBadRequest)
@@ -73,23 +73,28 @@ func (h *Handler) Insert(c *gin.Context) {
 }
 
 type updateResponse struct {
-	Id string `json:"id"`
+	Status bool `json:"status,omitempty"`
 }
 
 func (h *Handler) Update(c *gin.Context) {
-	t := new(Template)
+	id := c.Param("id")
+	if id == "" || len(id) <= 0 {
+		c.AbortWithStatus(http.StatusBadRequest)
+		return
+	}
+	var t Template
 	err := c.BindJSON(&t)
 	if err != nil {
 		c.AbortWithStatus(http.StatusBadRequest)
 		return
 	}
-	id, err := h.useCase.Update(asDomain(t))
+	status, err := h.useCase.Update(id, asDomain(t))
 	if err != nil {
 		c.String(http.StatusInternalServerError, "%s", err.Error())
 		return
 	}
 	c.JSON(http.StatusOK, &updateResponse{
-		Id: id,
+		Status: status,
 	})
 }
 
