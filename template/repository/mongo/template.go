@@ -24,7 +24,7 @@ type TemplateRepository struct {
 	dbOptions DbOptions
 }
 
-func NewTemplateRepository(options DbOptions) TemplateRepository {
+func NewTemplateRepository(options DbOptions) template.Repository {
 	return TemplateRepository{
 		dbOptions: options,
 	}

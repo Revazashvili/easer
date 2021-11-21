@@ -5,13 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a174be31-bd17-43ab-b252-cfa0bea3be21" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/htmlparser/error.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htmlparser/usecase.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htmlparser/usecase/usecase.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pdf/error.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pdf/usecase.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pdf/usecase/usecase.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/htmlparser_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlparser/usecase/usecase.go" beforeDir="false" afterPath="$PROJECT_DIR$/htmlparser/usecase/usecase.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/repository/mongo/template.go" beforeDir="false" afterPath="$PROJECT_DIR$/template/repository/mongo/template.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/usecase/usecase.go" beforeDir="false" afterPath="$PROJECT_DIR$/template/usecase/usecase.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +61,7 @@
       <recent name="C:\Users\levan\go\src\github.com\Revazashvili\easer\models" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Go Test.TestHtmlParser in github.com/Revazashvili/easer/tests">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="easer" />
       <working_directory value="$PROJECT_DIR$" />
@@ -83,6 +81,18 @@
       <filePath value="$PROJECT_DIR$/cmd/api/main.go" />
       <method v="2" />
     </configuration>
+    <configuration name="TestHtmlParser in github.com/Revazashvili/easer/tests" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="easer" />
+      <working_directory value="$PROJECT_DIR$/tests" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/Revazashvili/easer/tests" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestHtmlParser\E$" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
       <module name="easer" />
       <working_directory value="$PROJECT_DIR$" />
@@ -96,6 +106,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.TestHtmlParser in github.com/Revazashvili/easer/tests" />
         <item itemvalue="Go Build.go build github.com/Revazashvili/easer/cmd/api" />
       </list>
     </recent_temporary>

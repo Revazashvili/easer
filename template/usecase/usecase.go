@@ -9,7 +9,7 @@ type TemplateUseCase struct {
 	templateRepo template.Repository
 }
 
-func NewTemplateUseCase(templateRepo template.Repository) *TemplateUseCase {
+func NewTemplateUseCase(templateRepo template.Repository) template.UseCase {
 	return &TemplateUseCase{
 		templateRepo: templateRepo,
 	}

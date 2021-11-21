@@ -1,4 +1,4 @@
-package usecase
+package htmlparser
 
 import (
 	"bytes"
@@ -8,20 +8,23 @@ import (
 )
 
 type HtmlParserUseCase struct {
-	
 }
 
-func(tp *HtmlParserUseCase) Parse(name string,html string,data interface{}) (string,error) {
+func NewHtmlParser() *HtmlParserUseCase {
+	return &HtmlParserUseCase{}
+}
+
+func (tp *HtmlParserUseCase) Parse(name string, html string, data interface{}) (string, error) {
 	tmpl, err := template.New(name).Parse(html)
-	if err != nil{
-		log.Fatalf("%s",err.Error())
+	if err != nil {
+		log.Fatalf("%s", err.Error())
 		return "", htmlparser.ErrParseTemplate
 	}
 	var buf bytes.Buffer
 	err = tmpl.Execute(&buf, data)
-	if err != nil{
-		log.Fatalf("%s",err.Error())
+	if err != nil {
+		log.Fatalf("%s", err.Error())
 		return "", htmlparser.ErrParseDataToTemplate
 	}
-	return buf.String(),nil
+	return buf.String(), nil
 }
