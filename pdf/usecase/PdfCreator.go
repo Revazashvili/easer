@@ -25,24 +25,24 @@ func (c *Creator) Create(t models.Template, data interface{}) ([]byte, error) {
 
 	html, err := c.htmlParser.Parse(t.Id, t.TemplateBody, data)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		return nil, pdf.ErrRenderPdf
 	}
 	setPageOptions(html, t, g)
 
 	jsonBytes, err := g.ToJSON()
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		return nil, pdf.ErrRenderPdf
 	}
 	pdfGenerator, err := htmlToPdf.NewPDFGeneratorFromJSON(bytes.NewReader(jsonBytes))
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		return nil, pdf.ErrRenderPdf
 	}
 	err = pdfGenerator.Create()
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		return nil, pdf.ErrRenderPdf
 	}
 	return pdfGenerator.Bytes(), nil

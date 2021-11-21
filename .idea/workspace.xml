@@ -5,20 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a174be31-bd17-43ab-b252-cfa0bea3be21" name="Changes" comment="some changes">
-      <change afterPath="$PROJECT_DIR$/pdf/PdfCreator.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pdf/usecase/PdfCreator.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/templateusecase_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf/usecase/usecase.go" beforeDir="false" afterPath="$PROJECT_DIR$/pdf/usecase/usecase.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/app.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/delivery/http/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/template/delivery/http/handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/delivery/http/register.go" beforeDir="false" afterPath="$PROJECT_DIR$/template/delivery/http/register.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/error.go" beforeDir="false" afterPath="$PROJECT_DIR$/template/error.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/usecase.go" beforeDir="false" afterPath="$PROJECT_DIR$/template/usecase.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/usecase/usecase.go" beforeDir="false" afterPath="$PROJECT_DIR$/template/usecase/usecase.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/pdf_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/tests/pdf_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/repository/mongo/template.go" beforeDir="false" afterPath="$PROJECT_DIR$/template/repository/mongo/template.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,13 +52,14 @@
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\levan\go\src\github.com\Revazashvili\easer\models" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.TestHtmlParser in github.com/Revazashvili/easer/tests">
+  <component name="RunManager" selected="Go Test.TestGetTemplate in github.com/Revazashvili/easer/tests">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="easer" />
       <working_directory value="$PROJECT_DIR$" />
@@ -150,8 +139,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Test.TestHtmlParser in github.com/Revazashvili/easer/tests" />
         <item itemvalue="Go Test.TestGetTemplate in github.com/Revazashvili/easer/tests" />
+        <item itemvalue="Go Test.TestHtmlParser in github.com/Revazashvili/easer/tests" />
         <item itemvalue="Go Test.TestRenderPdf in github.com/Revazashvili/easer/tests" />
         <item itemvalue="Go Build.go build github.com/Revazashvili/easer/cmd/api" />
         <item itemvalue="Go Test.go test github.com/Revazashvili/easer/tests" />

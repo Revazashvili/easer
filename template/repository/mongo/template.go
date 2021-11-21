@@ -34,7 +34,7 @@ func getTemplateCollection(dbOptions DbOptions) (*mongo.Collection, error) {
 	clientOptions := options.Client().ApplyURI(dbOptions.Uri)
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		return nil, ErrGeneral
 	}
 	collection := client.Database(dbOptions.DbName).Collection(dbOptions.TemplateCollName)
@@ -45,7 +45,7 @@ func disconnect(coll *mongo.Collection) {
 	client := coll.Database().Client()
 	err := client.Disconnect(context.TODO())
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 }
 
@@ -60,12 +60,12 @@ func (tr TemplateRepository) GetTemplates() ([]models.Template, error) {
 		bson.D{},
 	)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		return nil, template.ErrTemplatesNotFound
 	}
 	var ts []Template
 	if err = cur.All(context.TODO(), &ts); err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		return nil, template.ErrTemplatesNotFound
 	}
 	return AsDomainList(ts), nil
@@ -80,7 +80,7 @@ func (tr TemplateRepository) GetTemplate(id string) (models.Template, error) {
 	var t Template
 	objID, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		return models.Template{}, template.ErrTemplateNotFound
 	}
 	err = coll.FindOne(
@@ -88,7 +88,7 @@ func (tr TemplateRepository) GetTemplate(id string) (models.Template, error) {
 		bson.M{"_id": bson.M{"$eq": objID}},
 	).Decode(&t)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		return models.Template{}, template.ErrTemplateNotFound
 	}
 	return AsDomain(t), nil
@@ -102,7 +102,7 @@ func (tr TemplateRepository) AddTemplate(t models.Template) (string, error) {
 	defer disconnect(coll)
 	insertResult, err := coll.InsertOne(context.TODO(), AsDbModel(t, primitive.NewObjectID()))
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		return "", template.ErrTemplateNotCreated
 	}
 	return insertResult.InsertedID.(primitive.ObjectID).Hex(), nil
@@ -116,7 +116,7 @@ func (tr TemplateRepository) UpdateTemplate(id string, t models.Template) (bool,
 	defer disconnect(coll)
 	objID, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		return false, template.ErrTemplateNotUpdated
 	}
 	update := bson.M{
@@ -126,7 +126,7 @@ func (tr TemplateRepository) UpdateTemplate(id string, t models.Template) (bool,
 		bson.M{"_id": bson.M{"$eq": objID}},
 		update)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		return false, template.ErrTemplateNotUpdated
 	}
 	return true, nil
@@ -140,12 +140,12 @@ func (tr TemplateRepository) DeleteTemplate(id string) error {
 	defer disconnect(coll)
 	objID, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		return template.ErrTemplateNotDeleted
 	}
 	_, err = coll.DeleteOne(context.TODO(), bson.M{"_id": bson.M{"$eq": objID}})
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 		return template.ErrTemplateNotDeleted
 	}
 	return nil

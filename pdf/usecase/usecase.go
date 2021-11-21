@@ -21,7 +21,7 @@ func NewPdfRenderer(tu template.UseCase, pg pdf.Creator) *UseCase {
 func (p *UseCase) Render(id string, data interface{}) ([]byte, error) {
 	t, err := p.tu.Find(id)
 	if err != nil {
-		log.Fatalf("Error occured while retreiving template to generate pdf %s", err.Error())
+		log.Printf("Error occured while retreiving template to generate pdf %s", err.Error())
 		return nil, pdf.ErrRenderPdf
 	}
 	return p.pdfCreator.Create(t, data)
