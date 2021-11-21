@@ -15,4 +15,5 @@ func TestHtmlParser(t *testing.T) {
 	if len(parsedHtml) < 0 {
 		t.Fatal("returned html is empty")
 	}
+	t.Log(parsedHtml)
 }

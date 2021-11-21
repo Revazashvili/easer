@@ -8,4 +8,5 @@ type UseCase interface {
 	Insert(t models.Template) (string, error)
 	Update(id string, t models.Template) (bool, error)
 	Delete(id string) error
+	Render(id string, data interface{}) (string, error)
 }

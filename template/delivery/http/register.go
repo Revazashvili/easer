@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func RegisterHTTPEndpoints(router *gin.RouterGroup,u template.UseCase)  {
+func RegisterHTTPEndpoints(router *gin.RouterGroup, u template.UseCase) {
 	h := NewHandler(u)
 	temp := router.Group("template")
 	{
@@ -14,5 +14,6 @@ func RegisterHTTPEndpoints(router *gin.RouterGroup,u template.UseCase)  {
 		temp.POST("/", h.Insert)
 		temp.PUT("/:id", h.Update)
 		temp.DELETE("/:id", h.Delete)
+		temp.GET("/render/:id", h.Render)
 	}
 }

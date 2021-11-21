@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+	htmlparser "github.com/Revazashvili/easer/htmlparser/usecase"
 	"github.com/Revazashvili/easer/template"
 	thttp "github.com/Revazashvili/easer/template/delivery/http"
 	tmongo "github.com/Revazashvili/easer/template/repository/mongo"
@@ -27,8 +28,9 @@ func NewApp() *App {
 		TemplateCollName: viper.GetString("mongo.template_collection"),
 	}
 	templateRepo := tmongo.NewTemplateRepository(dbOptions)
+	htmlParser := htmlparser.NewHtmlParser()
 	return &App{
-		templateUC: tusecase.NewTemplateUseCase(templateRepo),
+		templateUC: tusecase.NewTemplateUseCase(templateRepo, htmlParser),
 	}
 }
 

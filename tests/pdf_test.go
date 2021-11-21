@@ -16,9 +16,10 @@ func TestRenderPdf(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	tempUseCase := template.NewTemplateUseCase(repo)
 	htmlParser := htmlparser.NewHtmlParser()
-	pdfRenderer := pdf.NewPdfRenderer(tempUseCase, htmlParser)
+	tempUseCase := template.NewTemplateUseCase(repo, htmlParser)
+	pdfCreator := pdf.NewCreator(htmlParser)
+	pdfRenderer := pdf.NewPdfRenderer(tempUseCase, pdfCreator)
 	// create pdf with added template
 	bytes, err := pdfRenderer.Render(id, data)
 	if err != nil {

@@ -105,3 +105,20 @@ func (h *Handler) Delete(c *gin.Context) {
 	}
 	c.AbortWithStatus(http.StatusOK)
 }
+
+type renderResponse struct {
+	Html string
+}
+
+func (h *Handler) Render(c *gin.Context) {
+	id := c.Param("id")
+	var data interface{}
+	err := c.BindJSON(&data)
+	html, err := h.useCase.Render(id, data)
+	if err != nil {
+		c.String(http.StatusInternalServerError, "%s", err.Error())
+	}
+	c.JSON(http.StatusOK, &renderResponse{
+		Html: html,
+	})
+}
