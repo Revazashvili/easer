@@ -1,50 +1,13 @@
 package tests
 
 import (
-	"github.com/Revazashvili/easer/models"
 	"github.com/Revazashvili/easer/template/repository/mongo"
 	"testing"
 )
 
-var options = mongo.DbOptions{
-	Uri:              "mongodb://localhost:27017",
-	DbName:           "template_test",
-	TemplateCollName: "templates",
-}
-
-var template = models.Template{
-	Owner:        "App",
-	TemplateBody: "some html",
-	Name:         "test",
-	Description:  "test",
-	Options: models.Options{
-		Orientation:          "Portrait",
-		DisableInternalLinks: false,
-		DisableExternalLinks: false,
-		NoBackground:         true,
-		Margin: models.Margin{
-			Top:    1,
-			Right:  1,
-			Left:   1,
-			Bottom: 1,
-		},
-		PrintBackground:     false,
-		NoImages:            false,
-		Grayscale:           false,
-		Format:              "A4",
-		Dpi:                 2,
-		EnableForms:         false,
-		DisplayHeaderFooter: false,
-		HeaderFooterOptions: models.HeaderAndFooterOptions{
-			FooterCenter:   "ad",
-			HeaderFontName: "asd",
-		},
-	},
-}
-
 func TestGetTemplates(t *testing.T) {
 	tempRepo := mongo.NewTemplateRepository(options)
-	_, err := tempRepo.AddTemplate(template)
+	_, err := tempRepo.AddTemplate(templateSample)
 	if err != nil {
 		t.Fail()
 	}
@@ -58,11 +21,11 @@ func TestGetTemplates(t *testing.T) {
 
 func TestGetTemplate(t *testing.T) {
 	tempRepo := mongo.NewTemplateRepository(options)
-	id, err := tempRepo.AddTemplate(template)
+	id, err := tempRepo.AddTemplate(templateSample)
 	if err != nil {
 		t.Fail()
 	}
-	t.Logf("Inserted template id: %s", id)
+	t.Logf("Inserted templateSample id: %s", id)
 
 	tm, err := tempRepo.GetTemplate(id)
 	if err != nil {
@@ -73,7 +36,7 @@ func TestGetTemplate(t *testing.T) {
 
 func TestAddTemplate(t *testing.T) {
 	tempRepo := mongo.NewTemplateRepository(options)
-	_, err := tempRepo.AddTemplate(template)
+	_, err := tempRepo.AddTemplate(templateSample)
 	if err != nil {
 		t.Fail()
 	}
@@ -81,13 +44,13 @@ func TestAddTemplate(t *testing.T) {
 
 func TestUpdateTemplate(t *testing.T) {
 	tempRepo := mongo.NewTemplateRepository(options)
-	id, err := tempRepo.AddTemplate(template)
+	id, err := tempRepo.AddTemplate(templateSample)
 	if err != nil {
 		t.Fail()
 	}
 
-	template.Name = "test updated"
-	_, err = tempRepo.UpdateTemplate(id, template)
+	templateSample.Name = "test updated"
+	_, err = tempRepo.UpdateTemplate(id, templateSample)
 	if err != nil {
 		return
 	}
@@ -95,7 +58,7 @@ func TestUpdateTemplate(t *testing.T) {
 
 func TestDeleteTemplate(t *testing.T) {
 	tempRepo := mongo.NewTemplateRepository(options)
-	id, err := tempRepo.AddTemplate(template)
+	id, err := tempRepo.AddTemplate(templateSample)
 	if err != nil {
 		t.Fail()
 	}
