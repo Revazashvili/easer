@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a174be31-bd17-43ab-b252-cfa0bea3be21" name="Changes" comment="replace all log.Fatal with log.Println" />
+    <list default="true" id="a174be31-bd17-43ab-b252-cfa0bea3be21" name="Changes" comment="workspace.xml">
+      <change afterPath="$PROJECT_DIR$/pdf/delivery/http/handler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pdf/delivery/http/register.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -56,7 +60,7 @@
       <recent name="C:\Users\levan\go\src\github.com\Revazashvili\easer\models" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.TestGetTemplate in github.com/Revazashvili/easer/tests">
+  <component name="RunManager" selected="Go Test.go test github.com/Revazashvili/easer/tests">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="easer" />
       <working_directory value="$PROJECT_DIR$" />
@@ -136,11 +140,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.go test github.com/Revazashvili/easer/tests" />
         <item itemvalue="Go Test.TestGetTemplate in github.com/Revazashvili/easer/tests" />
         <item itemvalue="Go Test.TestHtmlParser in github.com/Revazashvili/easer/tests" />
         <item itemvalue="Go Test.TestRenderPdf in github.com/Revazashvili/easer/tests" />
         <item itemvalue="Go Build.go build github.com/Revazashvili/easer/cmd/api" />
-        <item itemvalue="Go Test.go test github.com/Revazashvili/easer/tests" />
       </list>
     </recent_temporary>
   </component>
@@ -164,9 +168,13 @@
     <MESSAGE value="add html parser test" />
     <MESSAGE value="some changes" />
     <MESSAGE value="replace all log.Fatal with log.Println" />
-    <option name="LAST_COMMIT_MESSAGE" value="replace all log.Fatal with log.Println" />
+    <MESSAGE value="workspace.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="workspace.xml" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/easer$go_test_github_com_Revazashvili_easer_tests.out" NAME="go test github.com/Revazashvili/easer/tests Coverage Results" MODIFIED="1637491635947" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
