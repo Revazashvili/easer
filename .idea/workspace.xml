@@ -4,19 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a174be31-bd17-43ab-b252-cfa0bea3be21" name="Changes" comment="add pdf render endpoint">
+    <list default="true" id="a174be31-bd17-43ab-b252-cfa0bea3be21" name="Changes" comment="refactor some code">
+      <change afterPath="$PROJECT_DIR$/scripts/pdfpackage.bash" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlparser/usecase.go" beforeDir="false" afterPath="$PROJECT_DIR$/htmlparser/usecase.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlparser/usecase/usecase.go" beforeDir="false" afterPath="$PROJECT_DIR$/htmlparser/usecase/usecase.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf/PdfCreator.go" beforeDir="false" afterPath="$PROJECT_DIR$/pdf/PdfCreator.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf/delivery/http/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/pdf/delivery/http/handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf/error.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf/usecase.go" beforeDir="false" afterPath="$PROJECT_DIR$/pdf/usecase.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf/usecase/PdfCreator.go" beforeDir="false" afterPath="$PROJECT_DIR$/pdf/usecase/PdfCreator.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf/usecase/usecase.go" beforeDir="false" afterPath="$PROJECT_DIR$/pdf/usecase/usecase.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/app.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/usecase/usecase.go" beforeDir="false" afterPath="$PROJECT_DIR$/template/usecase/usecase.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +47,7 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.modules.go.list.on.any.changes.was.set" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../tpm" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../TMM" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -179,7 +169,8 @@
     <MESSAGE value="replace all log.Fatal with log.Println" />
     <MESSAGE value="workspace.xml" />
     <MESSAGE value="add pdf render endpoint" />
-    <option name="LAST_COMMIT_MESSAGE" value="add pdf render endpoint" />
+    <MESSAGE value="refactor some code" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor some code" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
