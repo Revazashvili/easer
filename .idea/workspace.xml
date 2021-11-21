@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a174be31-bd17-43ab-b252-cfa0bea3be21" name="Changes" comment="some changes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/repository/mongo/template.go" beforeDir="false" afterPath="$PROJECT_DIR$/template/repository/mongo/template.go" afterDir="false" />
-    </list>
+    <list default="true" id="a174be31-bd17-43ab-b252-cfa0bea3be21" name="Changes" comment="replace all log.Fatal with log.Println" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -166,7 +163,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add html parser test" />
     <MESSAGE value="some changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="some changes" />
+    <MESSAGE value="replace all log.Fatal with log.Println" />
+    <option name="LAST_COMMIT_MESSAGE" value="replace all log.Fatal with log.Println" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
