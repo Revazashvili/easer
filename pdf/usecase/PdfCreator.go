@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"github.com/Revazashvili/easer/htmlparser"
 	"github.com/Revazashvili/easer/models"
-	"github.com/Revazashvili/easer/pdf"
 	htmlToPdf "github.com/SebastiaanKlippert/go-wkhtmltopdf"
 	"log"
 	"strings"
@@ -18,34 +17,31 @@ func NewCreator(htmlParser htmlparser.UseCase) *Creator {
 	return &Creator{htmlParser: htmlParser}
 }
 
-func (c *Creator) Create(t models.Template, data interface{}) ([]byte, error) {
+func (c *Creator) Create(t models.Template, data interface{}) ([]byte, bool) {
 	g := htmlToPdf.NewPDFPreparer()
-
 	setOptions(t.Options, g)
-
-	html, err := c.htmlParser.Parse(t.Id, t.TemplateBody, data)
-	if err != nil {
-		log.Println(err)
-		return nil, pdf.ErrRenderPdf
+	html, ok := c.htmlParser.Parse(t.Id, t.TemplateBody, data)
+	if !ok {
+		return nil, true
 	}
 	setPageOptions(html, t, g)
 
 	jsonBytes, err := g.ToJSON()
 	if err != nil {
 		log.Println(err)
-		return nil, pdf.ErrRenderPdf
+		return nil, true
 	}
 	pdfGenerator, err := htmlToPdf.NewPDFGeneratorFromJSON(bytes.NewReader(jsonBytes))
 	if err != nil {
 		log.Println(err)
-		return nil, pdf.ErrRenderPdf
+		return nil, true
 	}
 	err = pdfGenerator.Create()
 	if err != nil {
 		log.Println(err)
-		return nil, pdf.ErrRenderPdf
+		return nil, true
 	}
-	return pdfGenerator.Bytes(), nil
+	return pdfGenerator.Bytes(), false
 }
 
 func setOptions(options models.Options, g *htmlToPdf.PDFGenerator) {

@@ -3,6 +3,7 @@ package http
 import (
 	"github.com/Revazashvili/easer/pdf"
 	"github.com/gin-gonic/gin"
+	"log"
 	"net/http"
 )
 
@@ -20,13 +21,14 @@ func (h *Handler) Render(c *gin.Context) {
 	id := c.Param("id")
 	var data interface{}
 	err := c.BindJSON(&data)
-	bytes, err := h.useCase.Render(id, data)
 	if err != nil {
-		c.String(http.StatusInternalServerError, "%s", err.Error())
+		log.Println(err)
+		c.AbortWithStatus(http.StatusInternalServerError)
+	}
+	bytes, ok := h.useCase.Render(id, data)
+	if !ok {
+		c.JSON(http.StatusBadRequest, err)
 	}
 	c.Writer.Header().Set("Content-Type", "application/pdf")
-	if err != nil {
-		c.JSON(400, err)
-	}
-	c.JSON(200, bytes)
+	c.JSON(http.StatusOK, bytes)
 }

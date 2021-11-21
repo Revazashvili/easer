@@ -45,8 +45,8 @@ func (t *UseCase) Render(id string, data interface{}) (string, error) {
 	if err != nil {
 		return emptyString, template.ErrTemplateRender
 	}
-	parsedHtml, err := t.htmlParser.Parse(temp.Id, temp.TemplateBody, data)
-	if err != nil {
+	parsedHtml, ok := t.htmlParser.Parse(temp.Id, temp.TemplateBody, data)
+	if !ok {
 		return emptyString, template.ErrTemplateRender
 	}
 	return parsedHtml, nil

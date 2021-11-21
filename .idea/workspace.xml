@@ -4,10 +4,19 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a174be31-bd17-43ab-b252-cfa0bea3be21" name="Changes" comment="workspace.xml">
-      <change afterPath="$PROJECT_DIR$/pdf/delivery/http/handler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pdf/delivery/http/register.go" afterDir="false" />
+    <list default="true" id="a174be31-bd17-43ab-b252-cfa0bea3be21" name="Changes" comment="add pdf render endpoint">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlparser/usecase.go" beforeDir="false" afterPath="$PROJECT_DIR$/htmlparser/usecase.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlparser/usecase/usecase.go" beforeDir="false" afterPath="$PROJECT_DIR$/htmlparser/usecase/usecase.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf/PdfCreator.go" beforeDir="false" afterPath="$PROJECT_DIR$/pdf/PdfCreator.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf/delivery/http/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/pdf/delivery/http/handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf/error.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf/usecase.go" beforeDir="false" afterPath="$PROJECT_DIR$/pdf/usecase.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf/usecase/PdfCreator.go" beforeDir="false" afterPath="$PROJECT_DIR$/pdf/usecase/PdfCreator.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf/usecase/usecase.go" beforeDir="false" afterPath="$PROJECT_DIR$/pdf/usecase/usecase.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/usecase/usecase.go" beforeDir="false" afterPath="$PROJECT_DIR$/template/usecase/usecase.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,7 +178,8 @@
     <MESSAGE value="some changes" />
     <MESSAGE value="replace all log.Fatal with log.Println" />
     <MESSAGE value="workspace.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="workspace.xml" />
+    <MESSAGE value="add pdf render endpoint" />
+    <option name="LAST_COMMIT_MESSAGE" value="add pdf render endpoint" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>

@@ -2,31 +2,30 @@ package htmlparser
 
 import (
 	"bytes"
-	"github.com/Revazashvili/easer/htmlparser"
 	"html/template"
 	"log"
 )
 
-type HtmlParserUseCase struct {
+type UseCase struct {
 }
 
-func NewHtmlParser() *HtmlParserUseCase {
-	return &HtmlParserUseCase{}
+func NewHtmlParser() *UseCase {
+	return &UseCase{}
 }
 
 var emptyString = ""
 
-func (tp *HtmlParserUseCase) Parse(name string, html string, data interface{}) (string, error) {
+func (tp *UseCase) Parse(name string, html string, data interface{}) (string, bool) {
 	tmpl, err := template.New(name).Parse(html)
 	if err != nil {
 		log.Printf("%s", err.Error())
-		return emptyString, htmlparser.ErrParseTemplate
+		return emptyString, true
 	}
 	var buf bytes.Buffer
 	err = tmpl.Execute(&buf, data)
 	if err != nil {
 		log.Printf("%s", err.Error())
-		return emptyString, htmlparser.ErrParseDataToTemplate
+		return emptyString, true
 	}
-	return buf.String(), nil
+	return buf.String(), false
 }

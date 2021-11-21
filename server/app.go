@@ -3,6 +3,9 @@ package server
 import (
 	"context"
 	htmlparser "github.com/Revazashvili/easer/htmlparser/usecase"
+	"github.com/Revazashvili/easer/pdf"
+	phttp "github.com/Revazashvili/easer/pdf/delivery/http"
+	pusecase "github.com/Revazashvili/easer/pdf/usecase"
 	"github.com/Revazashvili/easer/template"
 	thttp "github.com/Revazashvili/easer/template/delivery/http"
 	tmongo "github.com/Revazashvili/easer/template/repository/mongo"
@@ -19,6 +22,7 @@ import (
 type App struct {
 	httpServer *http.Server
 	templateUC template.UseCase
+	pdfUC      pdf.UseCase
 }
 
 func NewApp() *App {
@@ -29,8 +33,11 @@ func NewApp() *App {
 	}
 	templateRepo := tmongo.NewTemplateRepository(dbOptions)
 	htmlParser := htmlparser.NewHtmlParser()
+	templateUseCase := tusecase.NewTemplateUseCase(templateRepo, htmlParser)
+	pdfCreator := pusecase.NewCreator(htmlParser)
 	return &App{
-		templateUC: tusecase.NewTemplateUseCase(templateRepo, htmlParser),
+		templateUC: templateUseCase,
+		pdfUC:      pusecase.NewPdfRenderer(templateUseCase, pdfCreator),
 	}
 }
 
@@ -42,7 +49,7 @@ func (a *App) Run(port string) error {
 	)
 	api := router.Group("api")
 	thttp.RegisterHTTPEndpoints(api, a.templateUC)
-
+	phttp.RegisterHTTPEndpoints(api, a.pdfUC)
 	a.httpServer = &http.Server{
 		Addr:           ":" + port,
 		Handler:        router,

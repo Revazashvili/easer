@@ -3,7 +3,6 @@ package pdf
 import (
 	"github.com/Revazashvili/easer/pdf"
 	"github.com/Revazashvili/easer/template"
-	"log"
 )
 
 type UseCase struct {
@@ -18,11 +17,10 @@ func NewPdfRenderer(tu template.UseCase, pg pdf.Creator) *UseCase {
 	}
 }
 
-func (p *UseCase) Render(id string, data interface{}) ([]byte, error) {
+func (p *UseCase) Render(id string, data interface{}) ([]byte, bool) {
 	t, err := p.tu.Find(id)
 	if err != nil {
-		log.Printf("Error occured while retreiving template to generate pdf %s", err.Error())
-		return nil, pdf.ErrRenderPdf
+		return nil, true
 	}
 	return p.pdfCreator.Create(t, data)
 }
