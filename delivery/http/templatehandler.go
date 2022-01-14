@@ -10,7 +10,7 @@ import (
 
 func RegisterTemplateHTTPEndpoints(router *gin.RouterGroup, s storage.Storage, p parsers.Parser) {
 	h := newTemplateHandler(s, p)
-	temp := router.Group("mongo")
+	temp := router.Group("template")
 	{
 		temp.GET("/", h.Get)
 		temp.GET("/:id", h.GetById)

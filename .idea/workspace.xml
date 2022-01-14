@@ -4,39 +4,18 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a174be31-bd17-43ab-b252-cfa0bea3be21" name="Changes" comment="add Dockerfile">
-      <change afterPath="$PROJECT_DIR$/delivery/http/pdfhandler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/delivery/http/templatehandler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parsers/htmlparser.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parsers/parser.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/renderers/pdfrenderer.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/renderers/renderer.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/storage.go" afterDir="false" />
+    <list default="true" id="a174be31-bd17-43ab-b252-cfa0bea3be21" name="Changes" comment="reorganize entire project">
+      <change afterPath="$PROJECT_DIR$/tests/templatestorage_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/api/api" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/api/api" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlparser/error.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlparser/usecase.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/htmlparser/usecase/usecase.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf/PdfCreator.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf/delivery/http/handler.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf/delivery/http/register.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf/usecase.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf/usecase/PdfCreator.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf/usecase/usecase.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/app.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/delivery/http/handler.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/delivery/http/models.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/delivery/http/register.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/error.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/repository.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/repository/mongo/mapping.go" beforeDir="false" afterPath="$PROJECT_DIR$/storage/mongo/mapping.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/repository/mongo/models.go" beforeDir="false" afterPath="$PROJECT_DIR$/storage/mongo/models.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/repository/mongo/template.go" beforeDir="false" afterPath="$PROJECT_DIR$/storage/mongo/template.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/usecase.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/usecase/usecase.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/delivery/http/templatehandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/delivery/http/templatehandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parsers/htmlparser.go" beforeDir="false" afterPath="$PROJECT_DIR$/parsers/htmlparser.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/htmlparser_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/tests/htmlparser_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/pdf_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/tests/pdf_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/sample.go" beforeDir="false" afterPath="$PROJECT_DIR$/tests/sample.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/templaterepository_test.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/templateusecase_test.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +75,7 @@
       <recent name="C:\Users\levan\go\src\github.com\Revazashvili\easer\models" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.go test github.com/Revazashvili/easer/tests">
+  <component name="RunManager" selected="Go Test.TestHtmlParser in github.com/Revazashvili/easer/tests">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="easer" />
       <working_directory value="$PROJECT_DIR$" />
@@ -105,15 +84,6 @@
       <package value="github.com/Revazashvili/easer" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="go build github.com/Revazashvili/easer/cmd/api" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="easer" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="github.com/Revazashvili/easer/cmd/api" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/cmd/api/main.go" />
       <method v="2" />
     </configuration>
     <configuration name="TestGetTemplate in github.com/Revazashvili/easer/tests" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
@@ -126,6 +96,18 @@
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
       <pattern value="^\QTestGetTemplate\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestGetTemplates in github.com/Revazashvili/easer/tests" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="easer" />
+      <working_directory value="$PROJECT_DIR$/tests" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/Revazashvili/easer/tests" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestGetTemplates\E$" />
       <method v="2" />
     </configuration>
     <configuration name="TestHtmlParser in github.com/Revazashvili/easer/tests" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
@@ -176,11 +158,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Test.go test github.com/Revazashvili/easer/tests" />
-        <item itemvalue="Go Test.TestGetTemplate in github.com/Revazashvili/easer/tests" />
         <item itemvalue="Go Test.TestHtmlParser in github.com/Revazashvili/easer/tests" />
+        <item itemvalue="Go Test.go test github.com/Revazashvili/easer/tests" />
+        <item itemvalue="Go Test.TestGetTemplates in github.com/Revazashvili/easer/tests" />
+        <item itemvalue="Go Test.TestGetTemplate in github.com/Revazashvili/easer/tests" />
         <item itemvalue="Go Test.TestRenderPdf in github.com/Revazashvili/easer/tests" />
-        <item itemvalue="Go Build.go build github.com/Revazashvili/easer/cmd/api" />
       </list>
     </recent_temporary>
   </component>
@@ -208,7 +190,8 @@
     <MESSAGE value="refactor some code" />
     <MESSAGE value="add bash file for pdf package wkhtmltopdf" />
     <MESSAGE value="add Dockerfile" />
-    <option name="LAST_COMMIT_MESSAGE" value="add Dockerfile" />
+    <MESSAGE value="reorganize entire project" />
+    <option name="LAST_COMMIT_MESSAGE" value="reorganize entire project" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>

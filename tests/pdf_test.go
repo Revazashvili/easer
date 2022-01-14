@@ -1,6 +1,5 @@
 package tests
 
-//
 //import (
 //	htmlparser "github.com/Revazashvili/easer/htmlparser/usecase"
 //	template "github.com/Revazashvili/easer/mongo/usecase"
