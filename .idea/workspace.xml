@@ -5,8 +5,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a174be31-bd17-43ab-b252-cfa0bea3be21" name="Changes" comment="add Dockerfile">
+      <change afterPath="$PROJECT_DIR$/delivery/http/pdfhandler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/delivery/http/templatehandler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/parsers/htmlparser.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/parsers/parser.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/renderers/pdfrenderer.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/renderers/renderer.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/storage.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlparser/error.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlparser/usecase.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlparser/usecase/usecase.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf/PdfCreator.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf/delivery/http/handler.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf/delivery/http/register.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf/usecase.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf/usecase/PdfCreator.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pdf/usecase/usecase.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/delivery/http/handler.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/delivery/http/models.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/delivery/http/register.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/error.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/repository.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/repository/mongo/mapping.go" beforeDir="false" afterPath="$PROJECT_DIR$/storage/mongo/mapping.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/repository/mongo/models.go" beforeDir="false" afterPath="$PROJECT_DIR$/storage/mongo/models.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/repository/mongo/template.go" beforeDir="false" afterPath="$PROJECT_DIR$/storage/mongo/template.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/usecase.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/usecase/usecase.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/htmlparser_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/tests/htmlparser_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/pdf_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/tests/pdf_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/sample.go" beforeDir="false" afterPath="$PROJECT_DIR$/tests/sample.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,12 +51,15 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" url="file://$PROJECT_DIR$/../../../../../../../Program Files/Go" />
+  <component name="GOROOT" url="file:///usr/lib/golang" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GoLibraries">
     <option name="indexEntireGoPath" value="false" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="1xarEokrpmq3UPgrAVQTowPjCI2" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -43,19 +76,23 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="go.format.on.save.advertiser.fired" value="true" />
     <property name="go.formatter.settings.were.checked" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.modules.go.list.on.any.changes.was.set" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="go.watchers.conflict.with.on.save.actions.check.performed" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/errors" />
+      <recent name="$PROJECT_DIR$/storage/template" />
       <recent name="C:\Users\levan\go\src\github.com\Revazashvili\easer\models" />
     </key>
   </component>
@@ -161,7 +198,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add html parser test" />

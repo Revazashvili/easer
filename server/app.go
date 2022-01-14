@@ -2,14 +2,11 @@ package server
 
 import (
 	"context"
-	htmlparser "github.com/Revazashvili/easer/htmlparser/usecase"
-	"github.com/Revazashvili/easer/pdf"
-	phttp "github.com/Revazashvili/easer/pdf/delivery/http"
-	pusecase "github.com/Revazashvili/easer/pdf/usecase"
-	"github.com/Revazashvili/easer/template"
-	thttp "github.com/Revazashvili/easer/template/delivery/http"
-	tmongo "github.com/Revazashvili/easer/template/repository/mongo"
-	tusecase "github.com/Revazashvili/easer/template/usecase"
+	delivery "github.com/Revazashvili/easer/delivery/http"
+	"github.com/Revazashvili/easer/parsers"
+	"github.com/Revazashvili/easer/renderers"
+	"github.com/Revazashvili/easer/storage"
+	"github.com/Revazashvili/easer/storage/mongo"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 	"log"
@@ -21,23 +18,24 @@ import (
 
 type App struct {
 	httpServer *http.Server
-	templateUC template.UseCase
-	pdfUC      pdf.UseCase
+	storage    storage.Storage
+	parser     parsers.Parser
+	renderer   renderers.Renderer
 }
 
 func NewApp() *App {
-	dbOptions := tmongo.DbOptions{
+	dbOptions := mongo.DbOptions{
 		Uri:              viper.GetString("mongo.uri"),
 		DbName:           viper.GetString("mongo.name"),
 		TemplateCollName: viper.GetString("mongo.template_collection"),
 	}
-	templateRepo := tmongo.NewTemplateRepository(dbOptions)
-	htmlParser := htmlparser.NewHtmlParser()
-	templateUseCase := tusecase.NewTemplateUseCase(templateRepo, htmlParser)
-	pdfCreator := pusecase.NewCreator(htmlParser)
+	templateStorage := mongo.NewTemplateStorage(dbOptions)
+	htmlParser := parsers.NewHtmlParser()
+	pdfRenderer := renderers.NewPdfRenderer(htmlParser)
 	return &App{
-		templateUC: templateUseCase,
-		pdfUC:      pusecase.NewPdfRenderer(templateUseCase, pdfCreator),
+		storage:  templateStorage,
+		parser:   htmlParser,
+		renderer: pdfRenderer,
 	}
 }
 
@@ -48,8 +46,8 @@ func (a *App) Run(port string) error {
 		gin.Logger(),
 	)
 	api := router.Group("api")
-	thttp.RegisterHTTPEndpoints(api, a.templateUC)
-	phttp.RegisterHTTPEndpoints(api, a.pdfUC)
+	delivery.RegisterPdfHTTPEndpoints(api, a.storage, a.renderer)
+	delivery.RegisterTemplateHTTPEndpoints(api, a.storage, a.parser)
 	a.httpServer = &http.Server{
 		Addr:           ":" + port,
 		Handler:        router,
